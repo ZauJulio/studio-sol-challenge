@@ -1,0 +1,49 @@
+{
+  "name": "studio-sol-challenge",
+  "version": "0.1.0",
+  "description": "Studio Sol Comunicação Challenge 2023/01",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "tsup src/index.ts",
+    "start": "node ./dist/index.js",
+    "dev": "DEBUG=* tsx watch src/index.ts",
+    "test": "vitest",
+    "coverage": "vitest run --coverage",
+    "lint": "eslint \"src/**/*.ts\"",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "scan": "./scripts/sonar-scanner.sh"
+  },
+  "repository": "git@github.com:ZauJulio/studio-sol-challenge.git",
+  "author": "zaujulio.dev@gmail.com",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "@apollo/server": "^4.3.1",
+    "cors": "^2.8.5",
+    "debug": "^4.3.4",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.7.0",
+    "express-winston": "^4.2.0",
+    "graphql": "^16.6.0",
+    "graphql-tag": "^2.12.6",
+    "winston": "^3.8.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/debug": "^4.1.7",
+    "@types/express": "^4.17.15",
+    "@types/node": "^18.11.18",
+    "@typescript-eslint/eslint-plugin": "^5.49.0",
+    "@typescript-eslint/parser": "^5.49.0",
+    "@vitest/coverage-c8": "^0.28.1",
+    "eslint": "^8.32.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.1",
+    "tsup": "^6.5.0",
+    "tsx": "^3.12.2",
+    "typescript": "^4.9.4",
+    "vitest": "^0.28.1"
+  }
+}
