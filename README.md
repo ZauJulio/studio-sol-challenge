@@ -9,8 +9,10 @@
   <img src="https://img.shields.io/badge/SonarQube-100000?style=for-the-badge&logo=Sonar&logoColor=white&labelColor=9699eA&color=8689DA"/>
 </p>
 
-<img src="https://i.imgur.com/25YMYht.png" width="300">
-<img src="https://i.imgur.com/S5TFmLr.png" width="300">
+<p align="center">
+  <img src="https://i.imgur.com/25YMYht.png" width="400">
+  <img src="https://i.imgur.com/S5TFmLr.png" width="400">
+</p>
 
 This is the Studio Sol Comunicação Backend Challenge of 2023/01 project. The project consists of a password valider microservice, where the user sends a password and the rules that should be validated and the server returns whether the password is valid or not, and which rules have been broken.
 
@@ -115,7 +117,7 @@ query {
 ### REST API
 
 ```bash
-http://localhost:8080/api
+http://localhost:8080/verify
 ```
 
 ### REST Query
