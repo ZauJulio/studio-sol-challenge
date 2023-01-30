@@ -23,11 +23,17 @@
       "@interfaces": [
         "common/interfaces"
       ],
+      "@types": [
+        "common/types"
+      ],
       "@config": [
         "common/config"
       ],
       "@constants": [
         "common/constants"
+      ],
+      "@utils": [
+        "common/utils"
       ],
       "@modules": [
         "modules"
@@ -37,7 +43,7 @@
       ]
     },
     "rootDirs": [
-      "src",
+      "src"
     ],
     "resolveJsonModule": true,
     "allowJs": true,
@@ -56,6 +62,6 @@
     "node_modules"
   ],
   "include": [
-    "src",
+    "src"
   ]
 }
