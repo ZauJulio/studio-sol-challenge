@@ -1,0 +1,136 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Studio Sol - Verify Passwowrd",
+    "description": "This is the Studio Sol Comunicação Backend Challenge of 2023/01 project. The project consists of a password valider microservice, where the user sends a password and the rules that should be validated and the server returns whether the password is valid or not, and which rules have been broken.\n\nThe server uses [Winston](https://github.com/winstonjs/winston) and the native debug for log and debug.Winston is a logger for node.js based on [log4J](https://logging.apache.org/log4J/2.x/).\n\nThe code written in TypeScript is transpilated to JavaScript using [Esbuild](https://esbuild.github.io/).Esbuild is an open source compiler that is faster than Babel.Written in GO, [tsx](https://github.com/esbuild-kit/tsx) was used for project automatic build.In addition, the [tsup](https://tsup.egoist.dev/) for server bundle, which is faster than [tsc](https://www.typescriptlang.org/docs/handbook/compilers-Options.html).\n\nFor communication, [Express](https://expressjs.com/en-br/) has been selected for being a lightweight, easy-to-use framework. In addition, [Apollo Server](https://www.apollographql.com/docs/apollo-server/) was used to create the graphql server. With adding a Rate Limit Middleware layer for the routes [Express-rate-limit](https://github.com/express-limit/express-limit) and [Cors](https://github.com/expressjs/cors).\n\nFinally, for unit tests the [Vitest](https://vitest.dev/) was the framework responsible for unit tests performed.Vost is a unit test framework for Node.js and browsers, which is faster than the Jest and the Mocha.\n\n**Endpoint Graphql Documentation:**\n- [Graphql Docs](http://localhost:8080/docs/graphql)",
+    "contact": {
+      "email": "zaujulio.dev@gmail.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "version": "0.1.0"
+  },
+  "externalDocs": {
+    "description": "Find out more about this project",
+    "url": "https://github.com/ZauJulio/studio-sol-challenge"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "verify",
+      "description": "validate your passwords"
+    }
+  ],
+  "paths": {
+    "/verify": {
+      "post": {
+        "tags": [
+          "verify"
+        ],
+        "summary": "Verify your password",
+        "description": "Validate your password with the specific rules",
+        "operationId": "verify",
+        "requestBody": {
+          "description": "Check password match with the rules",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/verifyInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/verifyOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Rules": {
+        "type": "object",
+        "properties": {
+          "rule": {
+            "type": "string",
+            "example": "minSpecialChars"
+          },
+          "value": {
+            "type": "integer",
+            "example": 5
+          }
+        }
+      },
+      "verifyInput": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string",
+            "example": "TesteSenhaForte!123&"
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Rules"
+            }
+          }
+        }
+      },
+      "verifyOutput": {
+        "type": "object",
+        "properties": {
+          "verify": {
+            "type": "boolean",
+            "example": false
+          },
+          "noMatch": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": "minSpecialChars"
+            }
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "verifyInput": {
+        "description": "Object that needs to be validated",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/verifyInput"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "verifyOutput": {
+        "description": "Object that needs to be validated",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/verifyOutput"
+            }
+          }
+        }
+      }
+    }
+  }
+}
