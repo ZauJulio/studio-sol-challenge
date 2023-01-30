@@ -1,1 +1,1 @@
-export { CommonRoutesConfig } from './CommonRoutesConfig';
+export { env } from './env';
