@@ -1,6 +1,6 @@
 projectKey=StudioSolChallengeBackend
-serverUrl=http://0.0.0.0:9000
+serverUrl=http://0.0.0.0:9090
 serverVersion=9.8.0.63668
-dashboardUrl=http://0.0.0.0:9000/dashboard?id=StudioSolChallengeBackend
-ceTaskId=AYXgOBD_D1xGkwB3bIWC
-ceTaskUrl=http://0.0.0.0:9000/api/ce/task?id=AYXgOBD_D1xGkwB3bIWC
+dashboardUrl=http://0.0.0.0:9090/dashboard?id=StudioSolChallengeBackend
+ceTaskId=AYYA-5HgotAJSgmV3VUL
+ceTaskUrl=http://0.0.0.0:9090/api/ce/task?id=AYYA-5HgotAJSgmV3VUL
