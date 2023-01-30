@@ -1,11 +1,21 @@
-FROM node:18.12.1-bullseye
+FROM node:18.12.1-alpine
 
-WORKDIR /usr/src/app
+WORKDIR /app
+
+COPY package.json .
 
 COPY . .
 
-RUN npm install --build-from-source && npm run build
+RUN rm -rf node_modules
 
-EXPOSE 3000
+RUN npm update -g npm
+
+RUN npm cache clear --force
+
+RUN npm install
+
+RUN npm run build
+
+EXPOSE 8080
 
 CMD ["npm", "run", "start"]
