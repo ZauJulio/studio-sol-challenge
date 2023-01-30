@@ -13,8 +13,8 @@
     "dev": "DEBUG=* tsx watch src/main.ts",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "lint": "eslint \"src/**/*.ts\"",
-    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "eslint \"src/**/*.ts\" --fix .",
+    "format": "prettier \"src/**/*.ts\" -u -w",
     "scan": "./scripts/sonar-scanner.sh",
     "docs:gen": "graphdoc --force",
     "prepare": "husky install"
@@ -29,11 +29,6 @@
   "graphdoc": {
     "endpoint": "http://localhost:8080/graphql",
     "output": "./public/docs/graphql"
-  },
-  "husky": {
-    "hooks": {
-      "pre-push": "npm run test && npm run coverage"
-    }
   },
   "dependencies": {
     "@apollo/server": "^4.3.1",

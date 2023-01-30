@@ -1,0 +1,6 @@
+public/docs/
+node_modules/
+coverage/
+dist/
+.husky/
+.scannerwork/

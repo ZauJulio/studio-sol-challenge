@@ -1,7 +1,6 @@
 {
   "*.{js,ts}": [
     "eslint --fix",
-    "prettier --write",
-    "vitest --passWithNoTests"
+    "prettier --write"
   ]
 }
