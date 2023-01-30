@@ -56,7 +56,11 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "strictPropertyInitialization": false,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": [
+      "jest",
+      "supertest"
+    ]
   },
   "exclude": [
     "node_modules"

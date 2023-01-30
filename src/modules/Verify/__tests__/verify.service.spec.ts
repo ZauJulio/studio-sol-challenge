@@ -1,6 +1,4 @@
-import { describe, it, expect } from 'vitest';
-
-import { _instance as VerifyService } from './verify.service';
+import { _instance as VerifyService } from '@modules/Verify/verify.service';
 
 describe('VerifyService', () => {
   it('should be defined', () => {

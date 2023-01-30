@@ -64,7 +64,6 @@ Start by defining the environment variables:
 
 ### Environment Variables
 
-- NODE_ENV=development
 - PORT=3000
 
 ### Install
