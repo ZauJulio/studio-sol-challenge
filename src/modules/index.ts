@@ -1,1 +1,1 @@
-export * as VerifyModule from './Verify';
+export { default as VerifyModule } from './Verify';

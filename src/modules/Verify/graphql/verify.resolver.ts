@@ -1,7 +1,8 @@
-import { VerifyService } from '@modules/Verify';
+import { _instance } from '../verify.service';
+import { IResolvers } from '@graphql-tools/utils';
 
-export const VerifyResolver = {
+export const VerifyResolver: IResolvers = {
   Query: {
-    verify: (_: any, args: any) => VerifyService.validate(args),
+    verify: (_: any, args: any) => _instance.validate(args),
   },
 };

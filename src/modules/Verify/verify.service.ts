@@ -1,28 +1,9 @@
-import { ESPECIAL_CHARACTERS } from '@constants';
-import { IRules } from '@interfaces';
+import { IService } from '@interfaces';
+import { IRule } from '@types';
+import { RULES } from '@utils';
 
-import debug from 'debug';
-
-const log: debug.IDebugger = debug('app:verify-middleware');
-
-export const RULES: {
-  [key: string]: (password: string, value: number) => boolean;
-} = {
-  minSize: (password: string, value: number) => password.length >= value,
-  minUppercase: (password: string, value: number) =>
-    (password.match(/[A-Z]/g) || []).length >= value,
-  minLowercase: (password: string, value: number) =>
-    (password.match(/[a-z]/g) || []).length >= value,
-  minDigit: (password: string, value: number) =>
-    (password.match(/[0-9]/g) || []).length >= value,
-  minSpecialChars: (password: string, value: number) =>
-    (password.match(ESPECIAL_CHARACTERS) || []).length >= value,
-  noRepeted: (password: string) =>
-    password.split('').every((char, index, array) => char !== array[index + 1]),
-};
-
-class VerifyService {
-  async validate(props: { password: string; rules: IRules[] }) {
+export default class VerifyService extends IService {
+  validate(props: { password: string; rules: IRule[] }) {
     const { password, rules } = props;
 
     const noMatch = rules.filter(
@@ -30,13 +11,15 @@ class VerifyService {
     );
 
     if (noMatch.length === 0) {
-      log('Valid password');
+      this.log('Valid password');
       return { verify: true, noMatch: [] };
     } else {
-      log('Invalid password');
+      this.log('Invalid password');
       return { verify: false, noMatch: noMatch.map((rule) => rule.rule) };
     }
   }
 }
 
-export default new VerifyService();
+export const _instance = new VerifyService({
+  name: 'verify',
+});

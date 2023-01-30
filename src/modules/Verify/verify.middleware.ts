@@ -1,28 +1,38 @@
 import { NextFunction, Request, Response } from 'express';
-import debug from 'debug';
-import { IRules } from '@interfaces';
+import { IMiddleware } from '@interfaces';
+import { IRule } from '@types';
 
-const log: debug.IDebugger = debug('app:verify-middleware');
-
-class VerifyMiddleware {
-  async validateBodyFields(req: Request, res: Response, next: NextFunction) {
+export default class VerifyMiddleware extends IMiddleware {
+  validateBodyFields = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
     const rules = req.body.rules;
+    const password = req.body.password;
 
     if (!rules || rules.length === 0) {
-      log('Missing Rules Fields');
+      this.log('Missing Rules Fields');
       // return res.status(400).send({ error: 'Missing Rules Fields' });
       return res.status(200).json({ verify: true, noMatch: [] });
     }
 
-    if (!rules.every((rule: IRules) => rule.rule && rule.value)) {
-      log('Missing Rule Fields');
+    if (!rules.every((rule: IRule) => rule.rule && rule.value)) {
+      this.log('Missing Rule Fields');
       // return res.status(400).send({ error: 'Missing Rule Fields' });
       return res.status(200).json({ verify: true, noMatch: [] });
     }
 
-    log('Valid Body Fields');
-    next();
-  }
-}
+    if (!password) {
+      this.log('Missing Password Field');
+      // return res.status(400).send({ error: 'Missing Password Field' });
+      return res.status(200).json({
+        verify: false,
+        noMatch: rules.map((r: IRule) => r.rule),
+      });
+    }
 
-export default new VerifyMiddleware();
+    this.log('Valid Body Fields');
+    next();
+  };
+}

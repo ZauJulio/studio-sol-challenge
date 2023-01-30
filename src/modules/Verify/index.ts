@@ -1,27 +1,32 @@
-import VerifyService from '@modules/Verify/verify.service';
-import VerifyController from '@modules/Verify/verify.controller';
-import VerifyMiddleware from '@modules/Verify/verify.middleware';
+import { Server } from 'http';
 
-import VerifyGraphql from '@modules/Verify/graphql';
+import VerifyController from './verify.controller';
+import VerifyMiddleware from './verify.middleware';
+import VerifyService from './verify.service';
 
-import { CommonRoutesConfig } from '@config';
-import { ICommonRoutesConfig } from '@interfaces';
+import VerifyGraphql from './graphql';
 
-class VerifyRoutes extends CommonRoutesConfig {
-  constructor(props: ICommonRoutesConfig) {
-    super({ ...props, name: 'VerifyRoutes' });
-  }
+import { IModule } from '@interfaces';
 
-  async configureRoutes() {
-    this.app
-      .route('/verify')
-      .all(VerifyMiddleware.validateBodyFields)
-      .post(VerifyController.verify);
-
-    await VerifyGraphql.routes({ ...this, resource: '' });
-
-    return this.app;
+export class VerifyModule extends IModule<VerifyMiddleware, VerifyController> {
+  async routes() {
+    this.router.post(
+      '/',
+      this.middleware.validateBodyFields,
+      this.controller.verify,
+    );
   }
 }
 
-export { VerifyRoutes, VerifyController, VerifyService, VerifyMiddleware };
+export default function Module(server: Server) {
+  const _module = new VerifyModule({
+    server,
+    name: 'verify',
+    service: VerifyService,
+    middleware: VerifyMiddleware,
+    controller: VerifyController,
+    graphql: VerifyGraphql,
+  });
+
+  return _module;
+}

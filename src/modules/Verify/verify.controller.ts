@@ -1,17 +1,18 @@
 import { Request, Response } from 'express';
-import { VerifyService } from '@modules/Verify';
 
-class VerifyController {
-  async verify(req: Request, res: Response) {
+import { IController } from '@interfaces';
+
+export class VerifyController extends IController {
+  verify = async (req: Request, res: Response) => {
     const { password, rules } = req.body;
 
-    const { verify, noMatch } = await VerifyService.validate({
+    const { verify, noMatch } = this.service.validate({
       password,
       rules,
     });
 
-    res.status(200).send({ verify, noMatch });
-  }
+    return res.status(200).send({ verify, noMatch });
+  };
 }
 
-export default new VerifyController();
+export default VerifyController;
