@@ -11,7 +11,7 @@
     "build": "tsup",
     "start": "node dist/main.js",
     "dev": "DEBUG=* tsx watch src/main.ts",
-    "test": "jest",
+    "test": "jest --detectOpenHandles",
     "test:watch": "jest --watch --detectOpenHandles",
     "test:coverage": "jest --coverage",
     "lint": "eslint \"src/**/*.ts\" --fix .",

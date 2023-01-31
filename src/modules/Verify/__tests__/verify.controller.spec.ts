@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { VerifyController } from '../verify.controller';
-import { IService } from '@interfaces';
+import { VerifyService } from './../verify.service';
 
 const controller = new VerifyController({
   name: 'verify-mock',
   service: {
     validate: () => ({ verify: true, noMatch: [] }),
     log: {} as any,
-  } as IService,
+  } as VerifyService,
 });
 
 describe('VerifyController', () => {

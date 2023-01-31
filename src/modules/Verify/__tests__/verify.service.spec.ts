@@ -1,17 +1,19 @@
-import { _instance as VerifyService } from '@modules/Verify/verify.service';
+import { VerifyService } from '@modules/Verify/verify.service';
 
 describe('VerifyService', () => {
+  const service = new VerifyService({ name: 'verify' });
+
   it('should be defined', () => {
-    expect(VerifyService).toBeDefined();
+    expect(service).toBeDefined();
   });
 
   it('should have a validate method', () => {
-    expect(VerifyService.validate).toBeDefined();
+    expect(service.validate).toBeDefined();
   });
 
   it('should return true when validating a valid password', () => {
     expect(
-      VerifyService.validate({
+      service.validate({
         password: 'TesteSenhaForte!123&',
         rules: [{ rule: 'minSpecialChars', value: 2 }],
       }),
@@ -23,7 +25,7 @@ describe('VerifyService', () => {
 
   it('should return false when validating an invalid password', () => {
     expect(
-      VerifyService.validate({
+      service.validate({
         password: 'TesteSenhaForte!123&',
         rules: [{ rule: 'minSpecialChars', value: 4 }],
       }),
@@ -35,9 +37,11 @@ describe('VerifyService', () => {
 });
 
 describe('VerifyController:test all rules', () => {
+  const service = new VerifyService({ name: 'verify' });
+
   it('should return not valid when minSpecialChars is not met', () => {
     expect(
-      VerifyService.validate({
+      service.validate({
         password: 'TesteSenhaForte!123&',
         rules: [{ rule: 'minSpecialChars', value: 4 }],
       }),
@@ -49,7 +53,7 @@ describe('VerifyController:test all rules', () => {
 
   it('should return not valid when minDigit is not met', () => {
     expect(
-      VerifyService.validate({
+      service.validate({
         password: 'TesteSenhaForte!123&',
         rules: [{ rule: 'minDigit', value: 4 }],
       }),
@@ -61,7 +65,7 @@ describe('VerifyController:test all rules', () => {
 
   it('should return not valid when minDigit is not met', () => {
     expect(
-      VerifyService.validate({
+      service.validate({
         password: 'TesteSenhaForte!123&',
         rules: [{ rule: 'minDigit', value: 4 }],
       }),
@@ -73,7 +77,7 @@ describe('VerifyController:test all rules', () => {
 
   it('should return not valid when minSize is not met', () => {
     expect(
-      VerifyService.validate({
+      service.validate({
         password: 'TesteSenhaForte!123&',
         rules: [{ rule: 'minSize', value: 32 }],
       }),
@@ -85,7 +89,7 @@ describe('VerifyController:test all rules', () => {
 
   it('should return not valid when minUppercase is not met', () => {
     expect(
-      VerifyService.validate({
+      service.validate({
         password: 'TesteSenhaForte!123&',
         rules: [{ rule: 'minUppercase', value: 5 }],
       }),
@@ -97,7 +101,7 @@ describe('VerifyController:test all rules', () => {
 
   it('should return not valid when minLowercase is not met', () => {
     expect(
-      VerifyService.validate({
+      service.validate({
         password: 'TesteSenhaForte!123&',
         rules: [{ rule: 'minLowercase', value: 20 }],
       }),
@@ -109,7 +113,7 @@ describe('VerifyController:test all rules', () => {
 
   it('should return not valid when noRepeted is not met', () => {
     expect(
-      VerifyService.validate({
+      service.validate({
         password: 'TesteSenhaaForte!123&',
         rules: [{ rule: 'noRepeted', value: 0 }],
       }),
