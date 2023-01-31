@@ -1,4 +1,4 @@
-# Studio Sol Comunicação Challenge 2023/Jan
+<h1>Studio Sol Comunicação Challenge 2023/Jan</h1>
 
 <p align="center">
   <img src="https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB"/>
@@ -13,17 +13,35 @@
   <img src="https://i.imgur.com/S5TFmLr.png" width="400">
 </p>
 
+- [📑 About the project](#-about-the-project)
+- [📦 Dependencies](#-dependencies)
+- [📥 Package Manager](#-package-manager)
+- [📂 Project Structure](#-project-structure)
+- [🚀 Getting Started](#-getting-started)
+  - [Environment Variables](#environment-variables)
+  - [Install](#install)
+  - [Run](#run)
+  - [Running with docker 🐋](#running-with-docker-)
+- [Usage 🔴](#usage-)
+  - [GraphQL API](#graphql-api)
+  - [REST API](#rest-api)
+- [⚙ Tests](#-tests)
+- [🔍 SonarQube](#-sonarqube)
+- [📖 Docs](#-docs)
+- [📝 License](#-license)
+
+
 This is the Studio Sol Comunicação Backend Challenge of 2023/01 project. The project consists of a password valider microservice, where the user sends a password and the rules that should be validated and the server returns whether the password is valid or not, and which rules have been broken.
 
 ## 📑 About the project
 
-The server uses [Winston](https://github.com/winstonjs/winston) and the native debug for log and debug.Winston is a logger for node.js based on [log4J](https://logging.apache.org/log4J/2.x/).
+The server uses [Winston](https://github.com/winstonjs/winston) and the native debug for log and debug.Winston is a logger for Node.js based on [log4J](https://logging.apache.org/log4J/2.x/).
 
-The code written in TypeScript is transpilated to JavaScript using [Esbuild](https://esbuild.github.io/).Esbuild is an open source compiler that is faster than Babel.Written in GO, [tsx](https://github.com/esbuild-kit/tsx) was used for project automatic build.In addition, the [tsup](https://tsup.egoist.dev/) for server bundle, which is faster than [tsc](https://www.typescriptlang.org/docs/handbook/compilers-Options.html).
+The code written in TypeScript is transpilated to JavaScript using [Esbuild](https://esbuild.github.io/). Esbuild is an open source compiler that is faster than Babel. Written in GO, [tsx](https://github.com/esbuild-kit/tsx) was used for project automatic build.In addition, the [tsup](https://tsup.egoist.dev/) for server bundle, which is faster than [tsc](https://www.typescriptlang.org/docs/handbook/compilers-Options.html).
 
 For communication, [Express](https://expressjs.com/en-br/) has been selected for being a lightweight, easy-to-use framework. In addition, [Apollo Server](https://www.apollographql.com/docs/apollo-server/) was used to create the graphql server. With adding a Rate Limit Middleware layer for the routes [Express-rate-limit](https://github.com/express-limit/express-limit) and [Cors](https://github.com/expressjs/cors).
 
-Finally, for unit tests the [Jest](https://jestjs.io/) was the framework responsible for unit tests performed.Vost is a unit test framework for Node.js and browsers, which is faster than the Jest and the Mocha.
+Finally, for unit tests the [Jest](https://jestjs.io/) was the framework responsible for unit tests performed. In addition, the [supertest](https://github.com/ladjs/supertest) was used to test the routes with integration tests.
 
 ## 📦 Dependencies
 
@@ -37,8 +55,8 @@ Finally, for unit tests the [Jest](https://jestjs.io/) was the framework respons
 
 - Run, Build and Test:
 
-  - Tsx
-  - Tsup
+  - Tsx - Esbuild
+  - Tsup - Esbuild
   - Jest
 
 - Base:
@@ -49,7 +67,7 @@ Finally, for unit tests the [Jest](https://jestjs.io/) was the framework respons
   - Prettier
   - Typescript
 
-## Package Manager 📦
+## 📥 Package Manager
 
 The project was developed using [PNPM](https://pnpm.io/), but you can use any of the package managers below:
 
@@ -57,25 +75,36 @@ The project was developed using [PNPM](https://pnpm.io/), but you can use any of
 - [Yarn](https://yarnpkg.com/)
 - [PNPM](https://pnpm.io/)
 
-## Project Structure 📁
+## 📂 Project Structure
 
 the root directory is src/ and contains the following files:
 
 ```bash
-├── __tests__/          # Integration tests
-├── common/             # Common files for the project
+-> Middlewares         # Validações, autenticação, sanitização, etc
+  -> Controllers       # Endpoints, parse de dados, etc
+    -> Services        # Regras de negócio, lógica, etc
+      -> Repositories  # Acesso ao banco de dados, operações, etc
+        -> Models      # Modelos de dados
+```
+
+```bash
+├── __tests__/        # Integration tests
+├── common/           # Common: general project core files
 │   ├── config/         # Config files, like env variables
 │   ├── constants/      # Constants files, like enums
 │   ├── interfaces/     # Interfaces files
 │   ├── types/          # Types files
 │   └── utils/          # Utility files, like rules, logger, etc
-├── modules/            # Modules files with the business logic
+├── modules/          # Modules: main fragments of the project
 │   └── Verify/
-│       ├── graphql/    # GraphQl files of module
+│       ├── graphql/              # GraphQl files of module
+│       ├── verify.controller.ts  # Controller with the endpoints
+│       ├── verify.middleware.ts  # Middleware with the handlers
+│       ├── verify.service.ts     # Service with the main business 
 │       └── __tests__/  # Unit tests of module
-├─ app.controller.ts    # Controller file with the endpoints
-├─ app.middleware.ts    # Middleware file with the handlers
-├─ app.service.ts       # Service file with the main business logic
+├─ app.controller.ts    # Controller file with all endpoints
+├─ app.middleware.ts    # Middleware file with general handlers
+├─ app.service.ts       # General services, like docs, static files...
 └─ main.ts              # Bootstrap the application
 ```
 
@@ -109,13 +138,13 @@ docker-compose up -d
 
 ## Usage 🔴
 
-### GraphQL Playground
+### GraphQL API
 
 ```bash
 http://localhost:8080/graphql
 ```
 
-### GraphQL Query
+- GraphQL Query
 
 ```graphql
 query {
@@ -140,7 +169,7 @@ query {
 http://localhost:8080/verify
 ```
 
-### REST Query
+- REST Query
 
 ```json
 {
@@ -158,7 +187,7 @@ http://localhost:8080/verify
 }
 ```
 
-## 📝 Tests
+## ⚙ Tests
 
 ```bash
 npm run test
@@ -170,7 +199,7 @@ npm run test:watch
 npm run test:coverage
 ```
 
-## 📝 SonarQube
+## 🔍 SonarQube
 
 ```bash
 npm run sonar
