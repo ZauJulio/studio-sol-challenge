@@ -3,12 +3,15 @@ import { Server } from 'http';
 import VerifyController from './verify.controller';
 import VerifyMiddleware from './verify.middleware';
 import VerifyService from './verify.service';
-
 import VerifyGraphql from './graphql';
 
-import { IModule } from '@interfaces';
+import { BaseModule } from '@interfaces';
 
-export class VerifyModule extends IModule<VerifyMiddleware, VerifyController> {
+export class VerifyModule extends BaseModule<
+  VerifyMiddleware,
+  VerifyController,
+  VerifyService
+> {
   async routes() {
     this.router.post(
       '/',

@@ -23,6 +23,9 @@
       "@interfaces": [
         "common/interfaces"
       ],
+      "@interfaces/*": [
+        "common/interfaces/*"
+      ],
       "@types": [
         "common/types"
       ],

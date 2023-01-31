@@ -7,7 +7,7 @@ import { ApolloServer } from '@apollo/server';
 
 import debug from 'debug';
 
-import { IGraphql, IModule } from '@interfaces';
+import { IGraphql, BaseModule } from '@interfaces';
 import { loadModules } from '@utils';
 
 class AppController {
@@ -62,7 +62,7 @@ class AppController {
     this.log('GraphQL - /graphql');
   }
 
-  logRoutes(_moduleInstance: IModule<any, any>) {
+  logRoutes(_moduleInstance: BaseModule<any, any, any>) {
     for (const _layer of _moduleInstance.router.stack) {
       const _path = _layer.route?.path;
       const _methods = Object.keys(_layer.route?.methods).join(', ');

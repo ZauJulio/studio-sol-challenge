@@ -1,8 +1,8 @@
-import { IService } from '@interfaces';
+import { BaseService } from '@interfaces';
 import { IRule } from '@types';
 import { RULES } from '@utils';
 
-export default class VerifyService extends IService {
+export class VerifyService extends BaseService {
   validate(props: { password: string; rules: IRule[] }) {
     const { password, rules } = props;
 
@@ -20,6 +20,4 @@ export default class VerifyService extends IService {
   }
 }
 
-export const _instance = new VerifyService({
-  name: 'verify',
-});
+export default VerifyService;

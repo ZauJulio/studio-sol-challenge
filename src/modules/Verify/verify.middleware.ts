@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
-import { IMiddleware } from '@interfaces';
+import { BaseMiddleware } from '@interfaces';
 import { IRule } from '@types';
 
-export default class VerifyMiddleware extends IMiddleware {
+export default class VerifyMiddleware extends BaseMiddleware {
   validateBodyFields = async (
     req: Request,
     res: Response,

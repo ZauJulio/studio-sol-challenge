@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
 
-import { IController } from '@interfaces';
+import VerifyService from './verify.service';
+import { BaseController } from '@interfaces';
 
-export class VerifyController extends IController {
+export class VerifyController extends BaseController<VerifyService> {
   verify = async (req: Request, res: Response) => {
     const { password, rules } = req.body;
 
