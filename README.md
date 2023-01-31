@@ -80,11 +80,9 @@ The project was developed using [PNPM](https://pnpm.io/), but you can use any of
 the root directory is src/ and contains the following files:
 
 ```bash
--> Middlewares         # Validações, autenticação, sanitização, etc
-  -> Controllers       # Endpoints, parse de dados, etc
-    -> Services        # Regras de negócio, lógica, etc
-      -> Repositories  # Acesso ao banco de dados, operações, etc
-        -> Models      # Modelos de dados
+-> Middlewares         # Validations, authentication, sanitization, etc.
+  -> Controllers       # Endpoints, dice, etc.
+    -> Services        # Business rules, logic, etc.
 ```
 
 ```bash
