@@ -1,26 +1,27 @@
 import { NextFunction, Request, Response } from 'express';
-import debug from 'debug';
+import { debug, Debugger } from 'debug';
 
-export type MiddlewareHandler = (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => Promise<Response | undefined>;
+export interface IMiddleware {
+  signature:
+    | ((
+        req: Request,
+        res: Response,
+        next: NextFunction,
+      ) => Promise<Response | undefined>)
+    | Debugger;
+  props: {
+    name: string;
+  };
+}
 
-export type MiddlewareConstructorProps = { name: string };
+export type IMiddlewareFat<T> = T extends BaseMiddleware ? T : never;
 
-export type MiddlewareConstructor<T> = new (
-  props: MiddlewareConstructorProps,
-) => T;
+export abstract class BaseMiddleware {
+  [key: string]: IMiddleware['signature'];
 
-export type IMiddlewareFat<T> = T extends IMiddleware ? T : never;
+  log: Debugger;
 
-export abstract class IMiddleware {
-  [key: string]: MiddlewareHandler | debug.Debugger;
-
-  log: debug.IDebugger;
-
-  constructor(props: MiddlewareConstructorProps) {
+  constructor(props: IMiddleware['props']) {
     this.log = debug(`app:${props.name}-middleware`);
   }
 }

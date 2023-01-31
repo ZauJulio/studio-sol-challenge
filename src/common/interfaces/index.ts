@@ -1,21 +1,17 @@
 export {
-  IMiddleware,
-  IMiddlewareFat,
-  MiddlewareConstructorProps,
-} from './middleware.interface';
-
-export {
+  BaseController,
   IController,
   IControllerFat,
-  ControllerConstructorProps,
 } from './controller.interface';
 
+export { BaseService, IService, IServiceFat } from './service.interface';
+
 export {
-  IService,
-  IServiceFat,
-  ServiceConstructorProps,
-} from './service.interface';
+  BaseMiddleware,
+  IMiddleware,
+  IMiddlewareFat,
+} from './middleware.interface';
+
+export { BaseModule } from './module.interface';
 
 export { IGraphql } from './graphql.interface';
-
-export { IModule, ModuleConstructorProps } from './module.interface';

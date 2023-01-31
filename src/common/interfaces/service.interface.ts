@@ -1,17 +1,17 @@
-import debug from 'debug';
+import { debug, Debugger } from 'debug';
 
-export type ServiceHandler = (props: any) => Promise<any> | any;
+export interface IService {
+  props: {
+    name: string;
+  };
+}
 
-export type ServiceConstructorProps = { name: string };
+export type IServiceFat<T> = T extends BaseService ? T : never;
 
-export type IServiceFat<T> = T extends IService ? T : never;
+export abstract class BaseService {
+  log: Debugger;
 
-export abstract class IService {
-  [key: string]: ServiceHandler | debug.Debugger;
-
-  log: debug.IDebugger;
-
-  constructor(props: ServiceConstructorProps) {
+  constructor(props: IService['props']) {
     this.log = debug(`app:${props.name}-service`);
   }
 }
