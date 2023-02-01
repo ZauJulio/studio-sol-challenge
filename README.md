@@ -9,8 +9,7 @@
 </p>
 
 <p align="center">
-  <img src="https://i.imgur.com/25YMYht.png" width="400">
-  <img src="https://i.imgur.com/S5TFmLr.png" width="400">
+  <img src="https://user-images.githubusercontent.com/49128655/215944688-d8aa2e16-3a11-4160-807f-678707961e60.png">
 </p>
 
 - [📑 About the project](#-about-the-project)
